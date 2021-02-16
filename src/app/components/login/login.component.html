@@ -1,0 +1,45 @@
+<div class="bg-custom">
+  
+
+  <div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container d-flex" style="height:100vh;">
+                <div class="row justify-content-center align-items-center w-100">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                            <div class="card-body">
+                              <div class="alert alert-danger text-center" *ngIf="error">
+                                Invalid login details!!
+                                  </div>
+<form #loginform="ngForm" novalidate (ngSubmit)="login()">
+
+    <div class="form-group">
+      <label class="small mb-1" for="inputEmailAddress">Email</label>
+      <input type="email" #username="ngModel" required class="form-control py-4" name="username" placeholder="Enter username"  [(ngModel)]="userModel.username">
+      <div *ngIf="username.errors && (username.invalid && username.touched)">
+        <small class="alert-danger" *ngIf="username.errors.required">Username is required</small>
+      </div>   
+    </div>
+    <div class="form-group">
+      <label class="small mb-1" for="inputPassword">Password</label>
+      <input type="password" #password="ngModel" required name="password" class="form-control py-4" placeholder="Enter password"  [(ngModel)]="userModel.password">
+      <div *ngIf="password.errors && (password.invalid && password.touched)">
+        <small class="alert-danger" *ngIf="password.errors.required">password is required</small>
+      </div>   
+    </div>
+    <button type="submit" [disabled]="loginform.form.invalid" class="btn btn-primary">Login</button>
+  </form>
+
+</div>
+<a routerLink="/forgotpass">Forgot password</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</div>
+</div>

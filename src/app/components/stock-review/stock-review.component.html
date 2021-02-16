@@ -1,0 +1,70 @@
+<div class="card-body">
+
+
+   <select (change)="onItemChange($event.target.value)" class="form-control">
+          <option value="all">All stock</option>
+            <option value="0">Expired</option>
+            <option value="current">Expiring this month</option>
+            <option value="1">Expiring in next 1 month</option>
+            <option value="2">Expiring in next 2 month</option>
+            <option value="3">Expiring in next 3 month</option>
+  
+        </select>
+
+
+    <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <input
+              #search
+              id="search"
+              type="text"
+              class="form-control"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <div class="col-md-4">
+          <select id="position-select" (change)="changeLimit($event)">
+            <option [value]="6">6</option>
+            <option [value]="7">7</option>
+            <option [value]="8">8</option>
+            <option [value]="9">9</option>
+          </select>
+        </div>
+        </div>
+      </div>
+    <div>
+        <ngx-datatable [rows]="medicinedata" class="material expandable" 
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="limit"
+        [count]="count"
+        [offset]="offset"
+        [selected]="selected"
+        [selectionType]="'checkbox'"
+        [selectAllRowsOnPage]="false"
+        (activate)="onActivate($event)"
+        (select)='onSelect($event)'
+        (page)="onPage($event)">>
+        <ngx-datatable-column name="Sr no" width="80">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+         {{medicinedata.indexOf(row)+1}}
+            </ng-template>
+        </ngx-datatable-column>
+            <ngx-datatable-column *ngFor="let col of columns" [name]="col.name" [prop]="col.prop" [width]="col.width"></ngx-datatable-column>
+            
+            <ngx-datatable-column name="Action" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                <span class="edit"><a routerLink="/dashboard/editmedicine/{{row.id}}"><i class="fa fa-edit"></i>
+                </a></span>
+                  <span class="delete" (click)="delete(row)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                </ng-template>
+              </ngx-datatable-column>
+        
+        </ngx-datatable>
+      </div>
+
+</div>

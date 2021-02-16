@@ -1,0 +1,91 @@
+<simple-notifications [options]="notifiation"></simple-notifications>
+<h2>Add Medicine</h2>
+<form #medicineform="ngForm" novalidate (ngSubmit)="insertmedicine(medicineform)">
+
+    <div class="form-group">
+      <label for="medicine">Medicine Name *</label>
+      <input type="text" #medicinename="ngModel" required class="form-control" name="medicinename" placeholder="Medicine Name" id="medicine" [(ngModel)]="addMedicine.medicinename">
+      <div *ngIf="medicinename.errors && (medicinename.invalid && medicinename.touched)">
+        <small class="alert-danger" *ngIf="medicinename.errors.required">Medicine name is required</small>
+      </div> 
+    </div>
+    <div class="form-group">
+      <label for="batch">Batch No. *</label>
+      <input type="text" #batchno="ngModel"  required class="form-control" name="batchno" placeholder="Batch No." id="batch" [(ngModel)]="addMedicine.batchno">
+      <div *ngIf="batchno.errors && (batchno.invalid && batchno.touched)">
+        <small class="alert-danger" *ngIf="batchno.errors.required">Batch no. is required</small>
+      </div> 
+    </div>
+    <div class="form-group">
+      <label for="batch">Quantity *</label>
+      <input type="number" #quantity="ngModel" required class="form-control" name="quantity" placeholder="Quantity *" id="quantity" [(ngModel)]="addMedicine.quantity">
+      <div *ngIf="quantity.errors && (quantity.invalid && quantity.touched)">
+        <small class="alert-danger" *ngIf="quantity.errors.required">Quantity is required</small>
+      </div> 
+    </div>
+    <div class="form-group">
+      <label for="batch">Notification Quantity *</label>
+      <input type="number" #nquantity="ngModel" required class="form-control" name="nquantity" placeholder="Notification Quantity *" id="NotificationQuantity" [(ngModel)]="addMedicine.notiquantity">
+      <div *ngIf="nquantity.errors && (nquantity.invalid && nquantity.touched)">
+        <small class="alert-danger" *ngIf="nquantity.errors.required">Notification Quantity is required</small>
+      </div> 
+    </div>
+    <div class="form-group">
+      <div class="form-check-inline">
+      <label for="batch">Medicine Type *</label>
+      <label class="form-check-label">
+      <input type="radio"  class="form-check-input" value="tab" name="mtype" [(ngModel)]="addMedicine.medicinetype">Tab
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" value="cap" name="mtype" [(ngModel)]="addMedicine.medicinetype" [checked]="true">Cap
+        </label>
+        </div>
+        <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" value="syp" name="mtype" [(ngModel)]="addMedicine.medicinetype">Syp
+          </label>
+          </div>
+          <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" value="inj" name="mtype" [(ngModel)]="addMedicine.medicinetype">Inj
+            </label>
+            </div>
+            <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" value="other" name="mtype" [(ngModel)]="addMedicine.medicinetype">Other
+              </label>
+              </div>
+    </div>
+    <div class="form-group">
+      <label for="MRP">MRP/Pc *</label>
+      <input type="number" #mrp="ngModel" required class="form-control" name="mrp" placeholder="MRP/Pc" [(ngModel)]="addMedicine.mrp" id="MRP">
+      <div *ngIf="mrp.errors && (mrp.invalid && mrp.touched)">
+        <small class="alert-danger" *ngIf="mrp.errors.required">MRP is required</small>
+      </div> 
+    </div>
+    <div class="form-group">
+      <label for="price">Price *</label>
+      <input type="number" #price="ngModel" required class="form-control" name="price" placeholder="Price" [(ngModel)]="addMedicine.price" id="price">
+      <div *ngIf="price.errors && (price.invalid && price.touched)">
+        <small class="alert-danger" *ngIf="price.errors.required">Price is required</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="expiry">Expiry *</label>
+      
+      <input type="date" #expiry="ngModel" required class="form-control" [(ngModel)]="addMedicine.expiry" name="expiry" placeholder="expiry" id="expiry">
+      <div *ngIf="expiry.errors && (expiry.invalid && expiry.touched)">
+        <small class="alert-danger" *ngIf="expiry.errors.required">expiry is required</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pharmacy">Pharmacy</label>
+      <input type="text" #pharmacy="ngModel" required class="form-control" [(ngModel)]="addMedicine.pharmacy" name="pharmacy" placeholder="Pharmacy" id="price">
+      <div *ngIf="pharmacy.errors && (pharmacy.invalid && pharmacy.touched)">
+        <small class="alert-danger" *ngIf="pharmacy.errors.required">pharmacy is required</small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="medicineform.form.invalid" class="btn btn-primary">Submit</button>
+  </form>

@@ -1,0 +1,138 @@
+<div class="card-body">
+
+   
+    
+    <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <input
+              #search
+              id="search"
+              type="text"
+              class="form-control"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <div class="col-md-4">
+          <select id="position-select" (change)="changeLimit($event)">
+            <option [value]="6">6</option>
+            <option [value]="7">7</option>
+            <option [value]="8">8</option>
+            <option [value]="9">9</option>
+          </select>
+        </div>
+        </div>
+      </div>
+    <div>
+        <ngx-datatable [rows]="invoicedata" class="material expandable" 
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="limit"
+        [count]="count"
+        [offset]="offset"
+        [selected]="selected"
+        [selectionType]="'checkbox'"
+        [selectAllRowsOnPage]="false"
+        (activate)="onActivate($event)"
+        (select)='onSelect($event)'
+        (page)="onPage($event)">>
+    
+            <ngx-datatable-column *ngFor="let col of columns" [name]="col.name" [prop]="col.prop" [width]="col.width"></ngx-datatable-column>
+            
+            <ngx-datatable-column name="Action" width="300">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <span class="open-invoice" (click)="openModal(row)"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                  </span>
+                  <span class="generate-pdf" (click)="generatePDF(row,'open')"><i class="far fa-file-pdf"></i>
+                  </span>
+                 
+                  
+
+  <span class="delete-invoice" (click)="delete(row)"><i class="fa fa-trash" aria-hidden="true"></i>
+  </span>
+
+
+
+
+                </ng-template>
+                
+              </ngx-datatable-column>
+
+             
+        </ngx-datatable>
+      </div>
+
+</div>
+
+
+<modal #htmlInsideModal>
+  <ng-template #modalHeader><h2>#{{rowdata.id}}</h2> <div class="text-center">
+    
+  </div></ng-template>
+  <ng-template #modalBody>
+    <div class="invoice-wrapper">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="invoice invoice-left">
+            <h5 class="top-head">Invoice</h5>
+            <p>Invoice to: <b>{{rowdata.name}}</b></p>
+            <p>Address: {{rowdata.address}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="invoice invoice-right text-right">
+            <h5 class="top-head">{{companyname}}</h5>
+            <p>Invoice number:#{{rowdata.id}}</p>
+            <p>Invoice Date: {{rowdata.date}}</p>
+          </div>
+        </div>
+
+      </div>
+     
+       
+<table class="table table-striped">
+<tr>
+<th>
+S.no
+</th>
+<th>
+Medicine
+</th>
+<th>
+Quantity
+</th>
+<th>
+Unit Price
+</th>
+<th>
+Amount
+</th>
+</tr>
+<tr *ngFor="let r of mediid; index as i">
+<td>{{i+1}}</td>
+<td>{{medirow[i]}}</td>
+<td>{{mediquantity[i]}}</td>
+<td>{{medimrp[i]}}</td>
+<td>{{meditoalamount[i]}}</td>
+</tr>
+</table>
+ 
+<div class="text-right">
+
+<p>
+Subtotal: ₹{{rowdata.subtotal}}
+</p>
+<p>
+  Discount: ₹{{(rowdata.discount*rowdata.subtotal)/100}}
+</p>
+  <h5>
+    Grandtotal: ₹{{rowdata.grand_total}}
+  </h5>
+</div>
+<button class="btn btn-primary text-center" (click)="generatePDF(rowdata,'download')">Download PDF <i class="far fa-file-pdf"></i></button> 
+    </div>
+  </ng-template>
+</modal>

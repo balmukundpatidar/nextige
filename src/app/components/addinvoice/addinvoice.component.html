@@ -1,0 +1,114 @@
+<simple-notifications [options]="notifiation"></simple-notifications>
+<h2>Add Invoice</h2> <h3>Invoice date: {{ myDate | date }} </h3>
+<form #invoiceform="ngForm" novalidate (ngSubmit)="insertinvoice(invoiceform)">
+
+     
+    <div class="form-group">
+      <label for="medicine">Customer Name *</label>
+      <input type="text" #customername="ngModel" required class="form-control" name="customername" placeholder="Customer Name" id="medicine" [(ngModel)]="invoiceData.name">
+      <div *ngIf="customername.errors && (customername.invalid && customername.touched)">
+        <small class="alert-danger" *ngIf="customername.errors.required">Customer name is required</small>
+      </div> 
+    </div>
+
+    <div class="form-group">
+        <label for="medicine">Address  *</label>
+        <input type="text" #address="ngModel" required class="form-control" name="address" placeholder="Address" id="medicine" [(ngModel)]="invoiceData.address">
+        <div *ngIf="address.errors && (address.invalid && address.touched)">
+          <small class="alert-danger" *ngIf="address.errors.required">Customer Address is required</small>
+        </div> 
+      </div>
+
+      <div class="form-group">
+        <label for="medicine">Add Medicine *</label>
+      
+
+        <div class="ng-autocomplete">
+          <ng-autocomplete
+          #medicine="ngModel"
+          [(ngModel)]="invoiceData.medicine_name"
+          name="medicine"
+          required
+            [data]="data"
+            [searchKeyword]="keyword"
+            placeHolder="Enter the medicine Name"
+            (selected)='selectEvent($event)'
+            (inputChanged)='onChangeSearch($event)'
+            (inputFocused)='onFocused($event)'
+            historyIdentifier=""
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+        
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.medicinename"></a>
+          </ng-template>
+        
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+        
+        <div *ngIf="Ismedicine && medicine.invalid">
+          <small class="alert-danger">medicine is required</small>
+        
+        </div> 
+      </div>
+
+
+      <div class="form-group">
+        <label for="medicine">Quantity</label>
+        <input type="number" #quantity="ngModel" required class="form-control" name="quantity" placeholder="Quantity" id="medicine" [(ngModel)]="invoiceData.medicine_quantity">
+        <div *ngIf="quantity.errors && (quantity.invalid && quantity.touched)">
+          <small class="alert-danger" *ngIf="quantity.errors.required">quantity is required</small>
+        </div> 
+        <div *ngIf="invoiceData.medicine_quantity > qlimit">
+          <small class="alert-danger">Please enter quantity less than or equal to {{qlimit}}</small>
+        </div> 
+        <div *ngIf="invoiceData.medicine_quantity < 1 && quantity.touched && !quantity.invalid">
+          <small class="alert-danger">Please enter quantity greater than 0</small>
+        </div> 
+      </div>
+     
+    <button type="submit" [disabled]="invoiceform.form.invalid || invoiceData.medicine_quantity > qlimit || invoiceData.medicine_quantity < 1 || invoiceData.medicine_name == '0'" class="btn btn-primary">Add</button>
+  </form>
+
+  <table class="table table-striped">
+    <th>
+      Sr no
+  </th>
+      <th>
+          Medicine name
+      </th>
+      <th>
+        quantity
+    </th>
+    <th>
+        unit price
+    </th>
+    <th>
+        Total amount
+    </th>
+    <th>
+      Actions
+  </th>
+  
+      <tr *ngFor="let ad of alldata; index as i">
+        <td>{{i+1}}</td>
+        <td>{{ad.medicine}}</td>
+        <td>{{ad.quantity}}</td>
+        <td>{{ad.price}}</td>
+        <td>{{ad.totalprice}}</td>
+        <td class="cursor" (click)="delrow(i,ad)"><i class="fa fa-trash" aria-hidden="true"></i>
+        </td>
+      </tr>
+    
+       
+       
+    
+  </table>
+  <div class="fsubmit" *ngIf="alldata.length > 0" class="text-right">
+ <form>Discount:(in percentage) <input type="number" name="discount" [(ngModel)]="discount" value="0"></form>
+ <p>
+ Grand total: {{(totalsum - totalsum*(this.discount/100)).toFixed(2)}}</p>
+  <button class="btn btn-primary" (click)="finalinvoicesubmit()">Submit</button></div>

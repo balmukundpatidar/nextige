@@ -1,0 +1,82 @@
+<div class="card-body">
+    
+    <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            
+            <input
+              #search
+              id="search"
+              type="text"
+              class="form-control"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <div class="col-md-4">
+          <select id="position-select" (change)="changeLimit($event)">
+            <option [value]="6">6</option>
+            <option [value]="7">7</option>
+            <option [value]="8">8</option>
+            <option [value]="9">9</option>
+          </select>
+
+          <!-- <a csvLink [data]="medicinedata">Export as csv</a> -->
+        </div>
+        </div>
+      </div>
+    <div>
+        <ngx-datatable [rows]="medicinedata" class="material expandable" 
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="limit"
+        [count]="count"
+        [offset]="offset"
+        [selected]="selected"
+        [selectionType]="'checkbox'"
+        [selectAllRowsOnPage]="false"
+        (activate)="onActivate($event)"
+        (select)='onSelect($event)'
+        (page)="onPage($event)">>
+        <ngx-datatable-column name="Sr no" width="80">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+         {{medicinedata.indexOf(row)+1}}
+            </ng-template>
+        </ngx-datatable-column>
+            <ngx-datatable-column *ngFor="let col of columns" [name]="col.name" [prop]="col.prop" [width]="col.width"></ngx-datatable-column>
+            
+            <ngx-datatable-column name="Action" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                <span class="edit"><a routerLink="/dashboard/editmedicine/{{row.id}}"><i class="fa fa-edit"></i>
+                </a></span>
+                  <span class="delete" (click)="delete(row)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                  <span class="updateq cursor" (click)="openModal(row)">Update Quantity</span>
+                 
+                </ng-template>
+              </ngx-datatable-column>
+        
+        </ngx-datatable>
+      </div>
+
+</div>
+
+<modal #htmlInsideModal>
+  <ng-template #modalHeader><p>Update <b>{{rowdata.medicinename}}</b> Quantity</p></ng-template>
+  <ng-template #modalBody>
+    <div class="invoice-wrapper">
+
+    <form>
+      <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" name="quantity" #quantityupdate/>
+      </div>
+    
+      <button class="btn btn-primary" (click)="updateQuantity(rowdata)">submit</button>
+    </form>
+
+
+    </div>
+  </ng-template>
+</modal>

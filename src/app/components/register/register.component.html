@@ -1,0 +1,81 @@
+
+<div class="bg-custom">
+  
+
+    <div id="layoutAuthentication">
+      <div id="layoutAuthentication_content">
+          <main>
+              <div class="container d-flex" style="height:100vh;">
+                  <div class="row justify-content-center align-items-center w-100">
+                      <div class="col-lg-5">
+                          <div class="card shadow-lg border-0 rounded-lg mt-5">
+                              <div class="card-header"><h3 class="text-center font-weight-light my-4">Register</h3></div>
+                              <div class="card-body">
+                               
+
+
+<form #registerform="ngForm" novalidate (ngSubmit)="register()">
+
+
+    <div class="form-group">
+        <label class="small mb-1" for="inputEmailAddress">Username</label>
+        <input type="email" #username="ngModel" required class="form-control py-4" name="username" placeholder="Enter username"  [(ngModel)]="registerUser.username">
+        <div *ngIf="username.errors && (username.invalid && username.touched)">
+          <small class="alert-danger" *ngIf="username.errors.required">Username is required</small>
+        </div>   
+      </div>
+
+
+
+    <div class="form-group">
+      <label class="small mb-1" for="inputEmailAddress">Email</label>
+      <input type="email" #email="ngModel" required class="form-control py-4" name="email" placeholder="Enter email"  [(ngModel)]="registerUser.email">
+      <div *ngIf="email.errors && (email.invalid && email.touched)">
+        <small class="alert-danger" *ngIf="email.errors.required">email is required</small>
+      </div>   
+    </div>
+
+    <div class="form-group">
+        <label class="small mb-1" for="inputPassword">Company name</label>
+        <input type="text" #company="ngModel" required name="company" class="form-control py-4" placeholder="Enter company name"  [(ngModel)]="registerUser.companyname">
+        <div *ngIf="company.errors && (company.invalid && company.touched)">
+          <small class="alert-danger" *ngIf="password.errors.required">company name is required</small>
+        </div>   
+      </div>
+
+
+    <div class="form-group">
+      <label class="small mb-1" for="inputPassword">Password</label>
+      <input type="password" #password="ngModel" required name="password" class="form-control py-4" placeholder="Enter password"  [(ngModel)]="registerUser.password">
+      <div *ngIf="password.errors && (password.invalid && password.touched)">
+        <small class="alert-danger" *ngIf="password.errors.required">password is required</small>
+      </div>   
+    </div>
+
+
+    <div class="form-group">
+        <label class="small mb-1" for="inputPassword">Confirm Password</label>
+        <input type="password" #cpassword="ngModel" required name="cpassword" class="form-control py-4" placeholder="confirm password"  [(ngModel)]="registerUser.cpassword">
+        <div *ngIf="cpassword.errors && (cpassword.invalid && cpassword.touched)">
+          <small class="alert-danger" *ngIf="cpassword.errors.required">password is required</small>
+        </div> 
+        <div *ngIf="(registerUser.cpassword != registerUser.password)  && !cpassword.invalid">
+            <small class="alert-danger">password does not match </small>
+          </div>   
+      </div>
+
+    <button type="submit" [disabled]="registerform.form.invalid" class="btn btn-primary">Register</button>
+  </form>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</div>
+</div>

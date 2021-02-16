@@ -1,0 +1,180 @@
+
+        <h1 class="mt-4">Dashboard</h1>
+       <div class="row">
+           <div class="col-md-9">
+    
+            <div class="row">
+                <div class="col-xl-4 col-md-4">
+                
+                    <div class="card card-custom mb-4">
+                 
+                       <div class="info">
+                        <h5 class="stock-header">Total tablet stock</h5>
+                        </div>
+                       <div class="info">
+                        <h5 class="">Items:</h5>
+                        <p class="inv-balance">{{counttab}}</p>
+                        <h5 class="">Amount: </h5>
+                        <p class="inv-balance">₹{{tabsum}}</p>
+                    </div>
+                    <div class="acc-action">
+                        <div class="">
+                            <a routerLink="/dashboard/addmedicine">
+                                   +</a>
+                            
+                        </div>
+                        <a routerLink="/dashboard/addmedicine">update</a>
+                    </div>
+                    
+                    </div>
+                   
+                </div>
+                <div class="col-xl-4 col-md-4">
+                
+                    <div class="card card-custom mb-4">
+                        <div class="info">
+                            <h5 class="stock-header">Total capsule stock</h5>
+                            </div>
+                 
+                   
+                        <div class="info">
+                            <h5 class="">Items:</h5>
+                            <p class="inv-balance">{{countcap}}</p>
+                            <h5 class="">Amount: </h5>
+                            <p class="inv-balance">₹{{capsum}}</p>
+                        </div>
+                        <div class="acc-action">
+                            <div class="">
+                                <a routerLink="/dashboard/addmedicine">
+                                       +</a>
+                                
+                            </div>
+                            <a routerLink="/dashboard/addmedicine">update</a>
+                        </div>
+                     </div>
+                   
+                </div>
+    
+                <div class="col-xl-4 col-md-4">
+                
+                    <div class="card card-custom mb-4">
+                 
+                        <div class="info">
+                            <h5 class="stock-header">Total Syrup Stock</h5>
+                            </div>
+                        <div class="info">
+                            <h5 class="">Items:</h5>
+                            <p class="inv-balance">{{countsyp}}</p>
+                            <h5 class="">Amount: </h5>
+                            <p class="inv-balance">₹{{sypsum}}</p>
+                        </div>
+                        <div class="acc-action">
+                            <div class="">
+                                <a routerLink="/dashboard/addmedicine">
+                                       +</a>
+                                
+                            </div>
+                            <a routerLink="/dashboard/addmedicine">update</a>
+                        </div>
+                     </div>
+                   
+                </div>
+                
+                
+                <div class="col-xl-4 col-md-4">
+                
+                    <div class="card card-custom mb-4">
+                      
+                        <div class="info">
+                            <h5 class="stock-header">Total Injection Stock</h5>
+                            </div>
+                        <div class="info">
+                            <h5 class="">Items:</h5>
+                            <p class="inv-balance">{{countinj}}</p>
+                            <h5 class="">Amount: </h5>
+                            <p class="inv-balance">₹{{injsum}}</p>
+                        </div>
+                        <div class="acc-action">
+                            <div class="">
+                                <a routerLink="/dashboard/addmedicine">
+                                       +</a>
+                                
+                            </div>
+                            <a routerLink="/dashboard/addmedicine">update</a>
+                          
+                        </div>
+                     </div>
+                   
+                </div>
+    
+                <div class="col-xl-4 col-md-4">
+                
+                    <div class="card card-custom mb-4">
+                        <div class="info">
+                        <h5 class="stock-header">Total other Stock</h5>
+                        </div>
+                      
+                        <div class="info">
+                            <h5 class="">Items:</h5>
+                            <p class="inv-balance">{{countother}}</p>
+                            <h5 class="">Amount: </h5>
+                            <p class="inv-balance">₹{{othersum}}</p>
+                        </div>
+                        <div class="acc-action">
+                            <div class="">
+                                <a routerLink="/dashboard/addmedicine">
+                                       +</a>
+                                
+                            </div>
+                            <a routerLink="/dashboard/addmedicine">update</a>
+                        </div>
+                     </div>
+                   
+                </div>
+    
+                <div class="col-xl-4 col-md-4">
+                
+                    <div class="card card-custom mb-4">
+                     
+                        <div class="info">
+                            <h5 class="stock-header">Total Stock</h5>
+                            </div>
+                        <div class="info">
+                            <h5 class="">Items:</h5>
+                            <p class="inv-balance">{{totalallcount}}</p>
+                            <h5 class="">Amount: </h5>
+                            <p class="inv-balance">₹{{totalall}}</p>
+                        </div>
+                        <div class="acc-action">
+                            <div class="">
+                                <a routerLink="/dashboard/addmedicine">
+                                       Manage</a>
+                                
+                            </div>
+                            <a routerLink="/dashboard/addmedicine">Review</a>
+                        </div>
+                     </div>
+                   
+                </div>
+             
+            </div>
+           </div>
+           <div class="col-md-3">
+               <div class="notification-box">
+                   <h5>Notifications</h5>
+                   <div class="noti-data" *ngIf="filterItemsOfType().length < 1">
+                       No data to display !!
+                   </div>
+                 <ul *ngIf="filterItemsOfType().length > 0">
+                    <li *ngFor="let d of filterItemsOfType()"><h6>{{d.medicinename}}</h6>
+                        <p>Quantity Remaining: <b>{{d.quantity}}</b></p></li>
+                 </ul>  
+               </div>
+        </div>
+       </div>
+     
+
+    
+    
+     
+   
